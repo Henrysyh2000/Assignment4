@@ -72,32 +72,60 @@ class Matrix :
     # Returns the maximum value within this(self) matrix
     def max_value(self):
         # To do ......
-        pass
-
+        res = self._theGrid[0, 0]
+        for i in range(self._theGrid.numRows()):
+            for j in range(self._theGrid.numCols()):
+                if self._theGrid[i, j] > res:
+                    res = self._theGrid[i, j]
+        return res
     # Scales the matrix by the given scalar.
     def scaleBy( self, scalar ):
         # To do ......
-        pass
-
+        for i in range(self._theGrid.numRows()):
+            for j in range(self._theGrid.numCols()):
+                self._theGrid[i, j] *= scalar
+                
     # Creates and returns a new matrix that is the transpose of this matrix.
     def transpose( self ):
         # To do ......
-        pass
+        new = Matrix(self._theGrid.numCols(), self._theGrid.numRows())
+        for i in range(self._theGrid.numRows()):
+            for j in range(self._theGrid.numCols()):
+                new[j, i] = self._theGrid[i, j]
+        return new
 
     # Creates and returns a new matrix that results from matrix addition.
     def __add__( self, rhsMatrix ):
         # To do ......
-        pass
+        new = Matrix(self._theGrid.numRows(), self._theGrid.numCols())
+        for i in range(self._theGrid.numRows()):
+            for j in range(self._theGrid.numCols()):
+                new[i, j] = self._theGrid[i, j] + rhsMatrix[i, j]
+        return new
 
     # Creates and returns a new matrix that results from matrix subtraction.
     def __sub__( self, rhsMatrix ):
         # To do ......
-        pass
+        new = Matrix(self._theGrid.numRows(), self._theGrid.numCols())
+        for i in range(self._theGrid.numRows()):
+            for j in range(self._theGrid.numCols()):
+                new[i, j] = self._theGrid[i, j] - rhsMatrix[i, j]
+        return new
 
     # Creates and returns a new matrix resulting from matrix multiplication.
     def __mul__( self, rhsMatrix ):
         # To do ......
-        pass
+        new = Matrix(self._theGrid.numRows(), rhsMatrix.numCols())
+        mid = rhsMatrix.transpose()
+        for i in range(self._theGrid.numRows()):
+            for a in range(mid.numRows()):
+                res = 0
+                for j in range(self._theGrid.numCols()):
+                    res += self._theGrid[i, j] * mid[a, j]
+                new[i, a] = res
+        return new
+            
+                
 
     def __str__(self):
         answer = []  # Use list for efficiency
